@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/14 14:48:24 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/08/14 19:16:06 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }				t_data;
+
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+}				t_vars;
+
+int	key_hook(int keycode, t_vars *vars)
+{
+	printf("hey_hook: %c\n", keycode);
+	if (keycode == 'z')	
+		mlx_destroy_window(vars->mlx, vars->win);
+	else if (keycode == 'c')
+		mlx_clear_window(vars->mlx, vars->win);
+}
 
 int draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, int color)
 {
@@ -36,16 +50,17 @@ int draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, 
 		pixelX += deltaX;
 		pixelY += deltaY;
 		--pixels;
-	}
-	
+	}	
 }
 
 int	main(void)
 {
-    void *mlx = mlx_init();
-    void *win = mlx_new_window(mlx, 640, 360, "Tutorial Window - Draw Line");
+	t_vars	vars;
+	vars.mlx = mlx_init();
+    vars.win = mlx_new_window(vars.mlx, 640, 360, "Tutorial Window - Draw Line");
 
-    draw_line(mlx, win, 640, 360, 0, 0, 0xFFFFFF);
-
-    mlx_loop(mlx);
+    draw_line(vars.mlx, vars.win, 640, 360, 0, 0, 0xFFFFFF);
+	//mlx_key_hook(win, key_hook, &vars);
+	mlx_hook(vars.win, 2, 1L<<0, key_hook, &vars);
+    mlx_loop(vars.mlx);
 }
