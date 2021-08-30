@@ -1,6 +1,9 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include "./mlx/mlx.h"
+# include "./mlx/mlx_int.h"
+# include "./libft/libft.h"
+# include "./get_next_line/get_next_line.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>
@@ -11,113 +14,45 @@
 # define MLX_SYNC_WIN_CMD_COMPLETED	3
 # define ESC 65307
 
-/* image */
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
-}				t_data;
-
-/* window */
-typedef struct s_vars {
+typedef struct s_mlx
+{
+	void	*mlx_win;
 	void	*mlx;
-	void	*win;
-}				t_vars;
+	t_img	*mlx_img;
 
-/* map checks */
-typedef struct s_map
-{
-	int	lines;
-	int correct_lines;
-	int	col_max;
-}				t_map;
+}	t_mlx;
 
-/* player */
-typedef struct s_player
-{
-	t_data	img;
-	int		x;
-	int		y;
-	float	smooth_x;
-	float	smooth_y;
-	bool	is_found;
-}				t_player;
-
-/* collectables */
-typedef struct s_collectible_elem
-{
-	int							pos_x;
-	int							pos_y;
-	bool						is_touched;
-	struct s_collectible_elem	*next;
-}				t_collectible_elem;
-
-/* collectables list */
-typedef struct s_collectible_list
-{
-	t_collectible_elem	*first;
-	bool				is_empty;
-	t_data				img;
-}				t_collectible_list;
-
-/* exits */
-typedef struct s_exit_elem
-{
-	int					pos_x;
-	int					pos_y;
-	bool				is_touched;
-	struct s_exit_elem	*next;
-}				t_exit_elem;
-
-/* exits list */
-typedef struct s_exit_list
-{
-	t_data		img;
-	t_exit_elem	*first;
-	bool		is_empty;
-}				t_exit_list;
-
-typedef struct s_v
+typedef struct s_coord
 {
 	int	x;
 	int	y;
-	int	i;
-	int	j;
-	int	an;
-}				t_v;
+}	t_coord;
 
-/* position return */
-typedef struct s_draw
+typedef struct s_game
 {
+	t_mlx	mlx;
+	int		map_width;
+	int		map_height;
+	int		numb_move;
+	t_img	*ground;
+	t_img	*player;
+	t_img	*collectible;
+	t_img	*tree;
+	t_img	*exit;
+	char	*map;
+	int		total_line_char;
+	int		line_number;
+	char	*player_position;
+	int		nb_exit;
+	int		numb;
+	int		endline;
+	int		fd;
 	int		x;
 	int		y;
-	float	r_x;
-	float	r_y;
-	int		color;
-	int		pos_x;
-	int		pos_y;
-	int		p_data_x;
-	int		p_data_y;
-}				t_draw;
+}	t_game;	
 
-/* aux reference */
-typedef struct s_mem
-{
-	t_player			*p;
-	t_collectible_list	*c;
-	t_exit_list			*e;
-	t_data				*data;
-	t_data				*floor;
-	t_data				*bottom;
-	t_vars				*vars;
-	t_map				*map;
-	char				**map2d;
-	int					moves;
-	unsigned int		frame;
-}	
+void	check_args(int argc, char **argv);
+void	check_walls(char *line);
+void	errors(char *nature, char *whole_chars);
 
 #endif
