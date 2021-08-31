@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/22 18:07:26 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/30 20:04:05 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/08/30 22:54:55 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 
 char	*ft_itoa(int n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strcat(char *dest, const char *src);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);

@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/30 22:00:10 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/08/30 23:09:56 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ void	treat_ret(int ret, t_game *game, char *line, char *all_chars)
 		game->endline = ft_strlen(line) - 1;
 		if (line[0] != '1' || line[game->endline] != '1')
 			errors("Error\nWall missing in the border", all_chars);
-		ft_strlcat(all_chars, line, ft_strlen(line));
+		ft_strcat(all_chars, line);
 		free(line);
 		line = 0;
 		ret = get_next_line(game->fd, &line);
 		if ((ret != 0) && (strlen(line)
 				!= (long unsigned int)game->total_line_char))
 			errors("Error\nmap has a problem", all_chars);
+		printf("line: %s, ret: %d, len: %lu\n", line, ret, ft_strlen(line));
 		if (ret == 0)
 		{
 			game->line_number++;
 			check_walls(line);
-			ft_strlcat(all_chars, line, ft_strlen(line));
+			ft_strcat(all_chars, line);
 			free(line);
 			line = 0;
 		}
-		printf("line: %s, ret: %d\n\n", line, ret);
 	}
 }
 
@@ -54,11 +54,12 @@ int	init_map(t_game *game, char *map_name)
 	if (game->fd == -1)
 		errors("Error\nfile cannot be read", all_chars);
 	ret = get_next_line(game->fd, &line);
+	printf("line: %s, ret: %d, len: %lu\n", line, ret, ft_strlen(line));
 	check_walls(line);
 	game->total_line_char = ft_strlen(line);
 	treat_ret(ret, game, line, all_chars);
-	printf("FINAL: line: %s, ret: %d\n\n", all_chars, ret);
-	//init_map2(game, all);
+	printf("\nmap: %s, total: %lu\n",all_chars, ft_strlen(all_chars));
+	//init_map2(game, all_chars);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 #    By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/20 17:59:10 by gantonio          #+#    #+#              #
-#    Updated: 2021/07/18 18:03:18 by gantonio         ###   ########.fr        #
+#    Updated: 2021/08/30 22:55:28 by gantonio         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ SRCS =	ft_atoi.c \
 		ft_putnbr_fd.c \
 		ft_putstr_fd.c \
 		ft_split.c \
+		ft_strcat.c \
 		ft_strchr.c \
+		ft_strcmp.c \
 		ft_strdup.c \
 		ft_strjoin.c \
 		ft_strlcat.c \
