@@ -1,9 +1,9 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include "./mlx/mlx.h"
-# include "./mlx/mlx_int.h"
-# include "./libft/libft.h"
-# include "./get_next_line/get_next_line.h"
+# include "../mlx/mlx.h"
+# include "../mlx/mlx_int.h"
+# include "../libft/libft.h"
+# include "../get_next_line/get_next_line.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdbool.h>

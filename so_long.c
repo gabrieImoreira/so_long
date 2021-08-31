@@ -6,31 +6,59 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/30 20:14:01 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/08/30 22:00:10 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./so_long.h"
+#include "./inc/so_long.h"
 
+
+void	treat_ret(int ret, t_game *game, char *line, char *all_chars)
+{
+	while (ret > 0)
+	{
+		game->line_number++;
+		game->endline = ft_strlen(line) - 1;
+		if (line[0] != '1' || line[game->endline] != '1')
+			errors("Error\nWall missing in the border", all_chars);
+		ft_strlcat(all_chars, line, ft_strlen(line));
+		free(line);
+		line = 0;
+		ret = get_next_line(game->fd, &line);
+		if ((ret != 0) && (strlen(line)
+				!= (long unsigned int)game->total_line_char))
+			errors("Error\nmap has a problem", all_chars);
+		if (ret == 0)
+		{
+			game->line_number++;
+			check_walls(line);
+			ft_strlcat(all_chars, line, ft_strlen(line));
+			free(line);
+			line = 0;
+		}
+		printf("line: %s, ret: %d\n\n", line, ret);
+	}
+}
 
 int	init_map(t_game *game, char *map_name)
 {
 	char	*line;
 	int		ret;
-	char	*whole_chars;
+	char	*all_chars;
 
-	whole_chars = malloc(sizeof(char) * 10000);
-	*whole_chars = 0;
+	all_chars = malloc(sizeof(char) * 10000);
+	*all_chars = 0;
+	line = 0;
 	game->line_number = 0;
 	game->fd = open(map_name, O_RDONLY);
 	if (game->fd == -1)
-		errors("Error\nfile cannot be read", whole_chars);
-	line = 0;
-	//ret = get_next_line(game->fd, &line);
+		errors("Error\nfile cannot be read", all_chars);
+	ret = get_next_line(game->fd, &line);
 	check_walls(line);
 	game->total_line_char = ft_strlen(line);
-	//deal_ret(ret, game, line, whole_chars);
-	//init_map2(game, whole_chars);
+	treat_ret(ret, game, line, all_chars);
+	printf("FINAL: line: %s, ret: %d\n\n", all_chars, ret);
+	//init_map2(game, all);
 	return (1);
 }
 

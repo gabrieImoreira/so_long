@@ -6,11 +6,11 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 19:22:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/30 20:11:31 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/08/30 21:26:30 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "./inc/so_long.h"
 
 void	errors(char *nature, char *whole_chars)
 {
@@ -23,7 +23,7 @@ void	check_args(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		ft_putendl_fd("Error\nInvalid number of argument", 2);
+		ft_putendl_fd("Error\nInvalid number of arguments", 2);
 		exit(0);
 	}
 	if ((ft_strlen(argv[1]) < 4) || (!ft_strrchr(argv[1], '.')))
