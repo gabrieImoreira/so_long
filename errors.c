@@ -6,16 +6,16 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 19:22:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/30 21:26:30 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/08/31 22:10:21 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./inc/so_long.h"
 
-void	errors(char *nature, char *whole_chars)
+void	errors(char *nature, char *map_read)
 {
 	ft_putendl_fd(nature, 2);
-	free(whole_chars);
+	free(map_read);
 	exit (0);
 }
 
@@ -53,4 +53,28 @@ void	check_walls(char *line)
 		}
 		i++;
 	}
+}
+
+void	check_map_elements(char *map_read)
+{
+	int	i;
+	int	counter;
+
+	i = 0;
+	counter = 0;
+	while (map_read[i] != '\0')
+	{
+		if (map_read[i] == 'P')
+			counter++;
+		if (ft_strchr("01CEP", map_read[i]) == NULL)
+		{
+			printf("here\n");
+			ft_putendl_fd("Error\nFile contains characters other than the allowed", 2);
+			free(map_read);
+			exit (1);
+		}
+		i++;
+	}
+	if (counter > 1)
+		errors("only one player should be on the map", map_read);
 }

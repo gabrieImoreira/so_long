@@ -6,34 +6,54 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/30 23:09:56 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/08/31 21:55:53 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./inc/so_long.h"
 
 
-void	treat_ret(int ret, t_game *game, char *line, char *all_chars)
+void	check_update_map(t_game *game, char *map_read)
+{
+	if ((ft_strchr(map_read, 'P') == NULL)
+		|| (ft_strchr(map_read, 'E') == NULL)
+		|| (ft_strchr(map_read, 'C') == NULL))
+		errors("Error\nMissing one player, one collectible or one exit",
+			map_read);
+	if (game->line_number - 1 == game->total_line_char)
+		errors("Error\nMap is square!", map_read);
+	check_map_elements(map_read);
+	game->map_height = (game->line_number - 1) * 40;
+	game->map_width = game->total_line_char * 40;
+	game->map = malloc(sizeof(char)
+			* (game->total_line_char * game->line_number) + 1);
+	ft_strlcpy(game->map, map_read,
+		(game->line_number * game->total_line_char));
+	game->fd = close(game->fd);
+	free(map_read);
+}
+
+void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 {
 	while (ret > 0)
 	{
 		game->line_number++;
 		game->endline = ft_strlen(line) - 1;
 		if (line[0] != '1' || line[game->endline] != '1')
-			errors("Error\nWall missing in the border", all_chars);
-		ft_strcat(all_chars, line);
+			errors("Error\nWall missing in the border", map_read);
+		ft_strcat(map_read, line);
 		free(line);
 		line = 0;
 		ret = get_next_line(game->fd, &line);
 		if ((ret != 0) && (strlen(line)
 				!= (long unsigned int)game->total_line_char))
-			errors("Error\nmap has a problem", all_chars);
+			errors("Error\nmap has a problem", map_read);
 		printf("line: %s, ret: %d, len: %lu\n", line, ret, ft_strlen(line));
 		if (ret == 0)
 		{
 			game->line_number++;
 			check_walls(line);
-			ft_strcat(all_chars, line);
+			ft_strcat(map_read, line);
 			free(line);
 			line = 0;
 		}
@@ -44,22 +64,22 @@ int	init_map(t_game *game, char *map_name)
 {
 	char	*line;
 	int		ret;
-	char	*all_chars;
+	char	*map_read;
 
-	all_chars = malloc(sizeof(char) * 10000);
-	*all_chars = 0;
+	map_read = malloc(sizeof(char) * 10000);
+	*map_read = 0;
 	line = 0;
 	game->line_number = 0;
 	game->fd = open(map_name, O_RDONLY);
 	if (game->fd == -1)
-		errors("Error\nfile cannot be read", all_chars);
+		errors("Error\nfile cannot be read", map_read);
 	ret = get_next_line(game->fd, &line);
 	printf("line: %s, ret: %d, len: %lu\n", line, ret, ft_strlen(line));
 	check_walls(line);
 	game->total_line_char = ft_strlen(line);
-	treat_ret(ret, game, line, all_chars);
-	printf("\nmap: %s, total: %lu\n",all_chars, ft_strlen(all_chars));
-	//init_map2(game, all_chars);
+	treat_ret(ret, game, line, map_read);
+	printf("\nmap: %s, total: %lu\n",map_read, ft_strlen(map_read));
+	check_update_map(game, map_read);
 	return (1);
 }
 

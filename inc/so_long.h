@@ -52,6 +52,7 @@ typedef struct s_game
 }	t_game;	
 
 void	check_args(int argc, char **argv);
+void	check_map_elements(char *map_read);
 void	check_walls(char *line);
 void	errors(char *nature, char *whole_chars);
 
