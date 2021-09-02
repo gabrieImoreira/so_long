@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/31 22:30:57 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/01 22:18:14 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	initializing_struct(t_game *game)
 			game->map_width, game->map_height, "so_long");
 	game->mlx.mlx_img = mlx_new_image
 		(game->mlx.mlx, game->map_width, game->map_height);
-	texture_init(game);
+	initializing_texture(game);
 	return (1);
 }
 
@@ -104,5 +104,6 @@ int	main(int argc, char **argv)
 	initializing_map(&game, argv[1]);
 	initializing_struct(&game);
 	initializing_texture(&game);
+	mlx_loop(game.mlx.mlx);
 }
 

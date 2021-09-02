@@ -55,5 +55,7 @@ void	check_args(int argc, char **argv);
 void	check_map_elements(char *map_read);
 void	check_walls(char *line);
 void	errors(char *nature, char *whole_chars);
+void	initializing_texture(t_game *game);
+void	set_image(t_game *game, t_img **img, char *path);
 
 #endif
