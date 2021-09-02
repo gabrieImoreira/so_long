@@ -34,10 +34,10 @@ typedef struct s_game
 	int		map_width;
 	int		map_height;
 	int		numb_move;
-	t_img	*ground;
+	t_img	*floor;
 	t_img	*player;
 	t_img	*collectible;
-	t_img	*tree;
+	t_img	*wall;
 	t_img	*exit;
 	char	*map;
 	int		total_line_char;

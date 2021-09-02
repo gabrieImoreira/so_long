@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/31 21:55:53 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/08/31 22:30:57 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 	}
 }
 
-int	init_map(t_game *game, char *map_name)
+int	initializing_map(t_game *game, char *map_name)
 {
 	char	*line;
 	int		ret;
@@ -83,11 +83,26 @@ int	init_map(t_game *game, char *map_name)
 	return (1);
 }
 
+int	initializing_struct(t_game *game)
+{
+	game->nb_exit = 0;
+	game->numb_move = 0;
+	game->mlx.mlx = mlx_init();
+	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx,
+			game->map_width, game->map_height, "so_long");
+	game->mlx.mlx_img = mlx_new_image
+		(game->mlx.mlx, game->map_width, game->map_height);
+	texture_init(game);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
 	check_args(argc, argv);
-	init_map(&game, argv[1]);
+	initializing_map(&game, argv[1]);
+	initializing_struct(&game);
+	initializing_texture(&game);
 }
 
