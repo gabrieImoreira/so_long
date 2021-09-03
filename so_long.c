@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/02 22:47:41 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/02 23:19:38 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ void	check_update_map(t_game *game, char *map_read)
 	game->map = malloc(sizeof(char)
 			* (game->total_line_char * game->line_number) + 1);
 	ft_strlcpy(game->map, map_read,
-		(game->line_number * game->total_line_char));
+		(game->line_number * game->total_line_char) + 1);
 	game->fd = close(game->fd);
 	free(map_read);
+	printf("\nmap game: %s, total: %lu\n",game->map, ft_strlen(game->map));
 }
 
 void	treat_ret(int ret, t_game *game, char *line, char *map_read)
@@ -78,7 +79,7 @@ int	initializing_map(t_game *game, char *map_name)
 	check_walls(line);
 	game->total_line_char = ft_strlen(line);
 	treat_ret(ret, game, line, map_read);
-	printf("\nmap: %s, total: %lu\n",map_read, ft_strlen(map_read));
+	//printf("\nmap: %s, total: %lu\n",map_read, ft_strlen(map_read));
 	check_update_map(game, map_read);
 	return (1);
 }
