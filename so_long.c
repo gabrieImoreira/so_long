@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/01 23:21:48 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/02 22:47:41 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_update_map(t_game *game, char *map_read)
 	if (game->line_number - 1 == game->total_line_char)
 		errors("Error\nMap is square!", map_read);
 	check_map_elements(map_read);
-	game->map_height = (game->line_number - 1) * 32;
+	game->map_height = (game->line_number) * 32;
 	game->map_width = game->total_line_char * 32;
 	game->map = malloc(sizeof(char)
 			* (game->total_line_char * game->line_number) + 1);
@@ -103,5 +103,6 @@ int	main(int argc, char **argv)
 	check_args(argc, argv);
 	initializing_map(&game, argv[1]);
 	initializing_struct(&game);
+	draw_map(&game);
 	mlx_loop(game.mlx.mlx);
 }

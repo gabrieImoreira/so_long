@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/01 23:23:04 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/02 22:34:55 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	draw_square(t_game *game, t_img *img, int x, int y)
 	int				j;
 
 	j = 0;
-	while (j < 40)
+	while (j < 32)
 	{
 		i = 0;
-		while (i < 40)
+		while (i < 32)
 		{
 			color = mlx_get_pixel(img, i, j);
 			if (color != mlx_rgb_to_int(0, 255, 255, 255))
@@ -76,11 +76,11 @@ void	draw_square(t_game *game, t_img *img, int x, int y)
 void	check_for_elements(t_game *game, int x, int y, int z)
 {
 	if (game->map[z + game->numb] == 'P')
-		draw_square(game, game->player, x, y * 39);
+		draw_square(game, game->player, x, y * 32);
 	if (game->map[z + game->numb] == 'C')
-		draw_square(game, game->collectible, x, y * 39);
+		draw_square(game, game->collectible, x, y * 32);
 	if (game->map[z + game->numb] == 'E' || game->map[z + game->numb] == 'X')
-		draw_square(game, game->exit, x, y * 39);
+		draw_square(game, game->exit, x, y * 32);
 }
 
 void	draw_map(t_game *game)
@@ -89,17 +89,17 @@ void	draw_map(t_game *game)
 
 	game->numb = 0;
 	game->y = 0;
-	game->x = -40;
-	while (game->y < (game->line_number - 1))
+	game->x = -32;
+	while (game->y < (game->line_number))
 	{
 		z = 0;
 		while (z < game->total_line_char)
 		{
 			if (game->map[z + game->numb] == '1')
-				draw_square(game, game->wall, game->x += 40, game->y * 39);
+				draw_square(game, game->wall, game->x += 32, game->y * 31);
 			else
 			{
-				draw_square(game, game->floor, game->x += 40, game->y * 39);
+				draw_square(game, game->floor, game->x += 32, game->y * 31);
 				check_for_elements(game, game->x, game->y, z);
 			}
 			z++;
