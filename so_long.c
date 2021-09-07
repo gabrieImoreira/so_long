@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/07 13:32:22 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/07 14:26:19 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 		free(line);
 		line = 0;
 		ret = get_next_line(game->fd, &line);
-		if ((ret != 0) && (strlen(line)
+		if ((ret != 0) && (ft_strlen(line)
 				!= (long unsigned int)game->total_line_char))
-			errors("Error\nmap has a problem", map_read);
+		errors("Error\nmap has a problem", map_read);
 		printf("line: %s, ret: %d, len: %lu\n", line, ret, ft_strlen(line));
 		if (ret == 0)
 		{
@@ -104,5 +104,6 @@ int	main(int argc, char **argv)
 	initializing_map(&game, argv[1]);
 	initializing_struct(&game);
 	draw_map(&game);
+	mlx_key_hook(game.mlx.mlx_win, key_hook, &game);
 	mlx_loop(game.mlx.mlx);
 }

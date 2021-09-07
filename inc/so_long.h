@@ -58,7 +58,9 @@ void	errors(char *nature, char *whole_chars);
 void	initializing_texture(t_game *game);
 void	set_image(t_game *game, t_img **img, char *path);
 void	draw_map(t_game *game);
-void	draw_sprite(t_game *game, char *path, int x, int y);
+int		key_hook(int keycode, t_game *game);
+
+
 
 
 #endif
