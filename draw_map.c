@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/08 20:30:41 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/08 21:10:25 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	draw_sprite(t_game *game, char *path, int x, int y)
 	img = mlx_xpm_file_to_image(game->mlx.mlx, path, &width, &height);
 	mlx_put_image_to_window(game->mlx.mlx, game->mlx.mlx_win,
 		img, x * 32, y * 32);
+	mlx_destroy_image(game->mlx.mlx, img);
 	
 }
 
