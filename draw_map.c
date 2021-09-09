@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/08 22:21:06 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 00:19:34 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ void	draw_sprite(t_game *game, char *path, int x, int y)
 void	call_sprite(t_game *game, int x, int y, int i)
 {
 	char	*path_exit;
+	char	*path_player;
 
+	game->path[PLAYER_RIGHT];
 	if (game->nb_exit == 1)
 		path_exit = "./img/exit_open.xpm";
 	else
 		path_exit = "./img/exit_closed.xpm";
 	draw_sprite(game, "./img/floor.xpm", game->x, game->y);
 	if (game->map[i + game->numb] == 'P')
-		draw_sprite(game, "./img/player.xpm", game->x, game->y);
+		draw_sprite(game, game->path[game->side], game->x, game->y);
 	else if (game->map[i + game->numb] == 'C')
 		draw_sprite(game, "./img/key.xpm", game->x, game->y);
 	else if (game->map[i + game->numb] == 'E')

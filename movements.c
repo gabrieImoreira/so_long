@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 14:24:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/08 22:01:13 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/08 23:50:06 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	move_left(t_game *game)
 	{
 		*++ptr = '0';
 		*--ptr = 'P';
+		game->side = 0;
 		game->numb_move += 1;
 		ft_putnbr_fd(game->numb_move, 1);
 		ft_putchar_fd('\n', 1);
@@ -38,6 +39,7 @@ void	move_right(t_game *game)
 	{
 		*ptr = 'P';
 		*--ptr = '0';
+		game->side = 1;
 		game->numb_move += 1;
 		ft_putnbr_fd(game->numb_move, 1);
 		ft_putchar_fd('\n', 1);

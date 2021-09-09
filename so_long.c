@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/08 22:02:43 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/08 23:44:47 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	initializing_map(t_game *game, char *map_name)
 	if (game->fd == -1)
 		errors("Error\nfile cannot be read", map_read);
 	ret = get_next_line(game->fd, &line);
-	printf("line: %s, ret: %d, len: %lu\n", line, ret, ft_strlen(line));
 	check_walls(line);
 	game->total_line_char = ft_strlen(line);
 	treat_ret(ret, game, line, map_read);
@@ -87,6 +86,9 @@ int	initializing_struct(t_game *game)
 	game->mlx.mlx = mlx_init();
 	game->mlx.mlx_win = mlx_new_window(game->mlx.mlx,
 			game->map_width, game->map_height, "so_long");
+	game->path[PLAYER_LEFT] = "./img/player_left.xpm";
+	game->path[PLAYER_RIGHT] = "./img/player_right.xpm";
+	game->side = 1;
 	return (1);
 }
 
