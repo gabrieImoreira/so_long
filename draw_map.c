@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/07 13:32:09 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:30:41 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,15 @@ void	draw_sprite(t_game *game, char *path, int x, int y)
 void	draw_map(t_game *game)
 {
 	int	z;
+	char *path_exit;
 
 	game->numb = 0;
 	game->y = 0;
 	game->x = 0;
+	if (game->nb_exit == 1)
+		path_exit = "./img/exit_open.xpm";
+	else
+		path_exit = "./img/exit_closed.xpm";	
 	while (game->y < (game->line_number))
 	{
 		z = 0;
@@ -46,7 +51,7 @@ void	draw_map(t_game *game)
 				else if (game->map[z + game->numb] == 'C')
 					draw_sprite(game, "./img/key.xpm", game->x, game->y);
 				else if (game->map[z + game->numb] == 'E')
-					draw_sprite(game, "./img/exit_closed.xpm", game->x, game->y);
+					draw_sprite(game, path_exit, game->x, game->y);
 			}
 			game->x++;
 			z++;
