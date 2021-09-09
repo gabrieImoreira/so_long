@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 20:09:31 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 20:19:14 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	draw_map(t_game *game)
 				18, create_trgb(0, 255, 255, 255), "score: ");
 		mlx_string_put(game->mlx.mlx, game->mlx.mlx_win, (game->map_width / 2) + 8,
 				18, create_trgb(0, 255, 255, 255), score);
+		free(score);
 		game->x = 0;
 		game->y++;
 		game->numb = game->total_line_char * game->y;

@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 14:24:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/08 23:50:06 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 20:18:35 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ void	move_down(t_game *game)
 
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == 'a')
+	if(keycode == ESC)
+		end_game(game);
+	else if (keycode == 'a')
 		move_left(game);
 	else if (keycode == 'd')
 		move_right(game);

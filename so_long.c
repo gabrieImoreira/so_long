@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 20:08:10 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 20:23:30 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ int	main(int argc, char **argv)
 	check_args(argc, argv);
 	initializing_map(&game, argv[1]);
 	initializing_struct(&game);
-	//printf("init: %d\n\n", game.map_width);
 	draw_map(&game);
 	mlx_key_hook(game.mlx.mlx_win, key_hook, &game);
+	mlx_hook(game.mlx.mlx_win, 33, 1L<<5, end_game, &game);
 	mlx_loop(game.mlx.mlx);
 }
