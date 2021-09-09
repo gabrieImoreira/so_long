@@ -6,12 +6,11 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/08 21:19:56 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/08 22:02:43 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./inc/so_long.h"
-
 
 void	check_update_map(t_game *game, char *map_read)
 {
@@ -31,7 +30,6 @@ void	check_update_map(t_game *game, char *map_read)
 		(game->line_number * game->total_line_char) + 1);
 	game->fd = close(game->fd);
 	free(map_read);
-	printf("\nmap game: %s, total: %lu\n",game->map, ft_strlen(game->map));
 }
 
 void	treat_ret(int ret, t_game *game, char *line, char *map_read)
@@ -48,8 +46,7 @@ void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 		ret = get_next_line(game->fd, &line);
 		if ((ret != 0) && (ft_strlen(line)
 				!= (long unsigned int)game->total_line_char))
-		errors("Error\nmap has a problem", map_read);
-		printf("line: %s, ret: %d, len: %lu\n", line, ret, ft_strlen(line));
+			errors("Error\nmap has a problem", map_read);
 		if (ret == 0)
 		{
 			game->line_number++;
@@ -79,7 +76,6 @@ int	initializing_map(t_game *game, char *map_name)
 	check_walls(line);
 	game->total_line_char = ft_strlen(line);
 	treat_ret(ret, game, line, map_read);
-	//printf("\nmap: %s, total: %lu\n",map_read, ft_strlen(map_read));
 	check_update_map(game, map_read);
 	return (1);
 }

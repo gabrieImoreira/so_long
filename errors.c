@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 19:22:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/02 23:01:01 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/08 21:59:13 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	check_map_elements(char *map_read)
 			counter++;
 		if (ft_strchr("01CEP", map_read[i]) == NULL)
 		{
-			ft_putendl_fd("Error\nFile contains characters other than the allowed", 2);
+			ft_putendl_fd("Error\nCharacters not allowed", 2);
 			free(map_read);
 			exit (1);
 		}
