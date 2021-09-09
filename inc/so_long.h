@@ -29,7 +29,7 @@ typedef struct s_mlx
 typedef struct s_game
 {
 	t_mlx	mlx;
-	char	*path[1];
+	char	*path[2];
 	int		map_width;
 	int		map_height;
 	int		numb_move;
@@ -53,6 +53,7 @@ void	errors(char *nature, char *whole_chars);
 void	initializing_texture(t_game *game);
 void	set_image(t_game *game, t_img **img, char *path);
 void	draw_map(t_game *game);
+int		create_trgb(int t, int r, int g, int b);
 int		end_game(t_game *game);
 int		key_hook(int keycode, t_game *game);
 

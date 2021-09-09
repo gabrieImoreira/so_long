@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 00:19:34 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 20:09:31 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	draw_sprite(t_game *game, char *path, int x, int y)
 void	call_sprite(t_game *game, int x, int y, int i)
 {
 	char	*path_exit;
-	char	*path_player;
 
 	game->path[PLAYER_RIGHT];
 	if (game->nb_exit == 1)
@@ -46,6 +45,7 @@ void	call_sprite(t_game *game, int x, int y, int i)
 void	draw_map(t_game *game)
 {
 	int		i;
+	char	*score;
 
 	game->numb = 0;
 	game->y = 0;
@@ -62,8 +62,18 @@ void	draw_map(t_game *game)
 			game->x++;
 			i++;
 		}
+		score = ft_itoa(game->numb_move);
+		mlx_string_put(game->mlx.mlx, game->mlx.mlx_win, (game->map_width / 2) - 32,
+				18, create_trgb(0, 255, 255, 255), "score: ");
+		mlx_string_put(game->mlx.mlx, game->mlx.mlx_win, (game->map_width / 2) + 8,
+				18, create_trgb(0, 255, 255, 255), score);
 		game->x = 0;
 		game->y++;
 		game->numb = game->total_line_char * game->y;
 	}
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
 }
