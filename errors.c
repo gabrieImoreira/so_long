@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 19:22:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 21:36:25 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 22:34:20 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	check_args(int argc, char **argv)
 	}
 	if ((ft_strlen(argv[1]) < 4) || (!ft_strrchr(argv[1], '.')))
 	{
-		ft_putendl_fd("Error\ninvalid argument", 2);
+		ft_putendl_fd("Error\nInvalid argument", 2);
 		exit(0);
 	}
 	if (ft_strcmp(ft_strrchr(argv[1], '.'), ".ber") != 0)
 	{
-		ft_putendl_fd("Error\nfile must be of type \"<name>.ber\"", 2);
+		ft_putendl_fd("Error\nFile must be of type \"<name>.ber\"", 2);
 		exit(0);
 	}
 }
@@ -47,7 +47,7 @@ void	check_walls(char *line)
 	{
 		if (line[i] != '1')
 		{
-			ft_putendl_fd("map is not surrounded by walls", 2);
+			ft_putendl_fd("Error\nMap is not surrounded by walls", 2);
 			free(line);
 			exit (1);
 		}
@@ -75,5 +75,5 @@ void	check_map_elements(char *map_read)
 		i++;
 	}
 	if (counter > 1)
-		errors("only one player should be on the map", map_read);
+		errors("Error\nOnly one player should be on the map", map_read);
 }

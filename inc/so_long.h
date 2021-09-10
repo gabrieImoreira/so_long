@@ -39,6 +39,7 @@ typedef struct s_game
 	int		exit_is_free;
 	int		player_side;
 	int		aux_num;
+	int		size_line;
 	int		fd;
 	int		x;
 	int		y;
