@@ -6,12 +6,11 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 21:41:34 by gantonio          #+#    #+#             */
-/*   Updated: 2021/08/30 20:19:01 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/10 18:47:20 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "../inc/get_next_line.h"
 
 char	*ft_fix_repository(char *str)
 {

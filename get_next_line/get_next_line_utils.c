@@ -6,11 +6,11 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:54:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 23:53:26 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/10 18:47:10 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../inc/get_next_line.h"
 
 size_t	ft_strlen_gnl(const char *str)
 {

@@ -1,15 +1,12 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# include "./get_next_line.h"
 # include "../mlx/mlx.h"
 # include "../mlx/mlx_int.h"
 # include "../libft/libft.h"
-# include "../get_next_line/get_next_line.h"
 # include <stdio.h>
 # include <stdlib.h>
 
-# define MLX_SYNC_IMAGE_WRITABLE	1
-# define MLX_SYNC_WIN_FLUSH_CMD		2
-# define MLX_SYNC_WIN_CMD_COMPLETED	3
 # define ESC 65307
 
 enum e_player
