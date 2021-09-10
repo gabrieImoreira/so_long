@@ -6,18 +6,18 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 23:52:19 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:51:33 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./inc/so_long.h"
+#include "../inc/so_long.h"
 
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	print_score(t_game *game, char *score)
+static void	print_score(t_game *game, char *score)
 {
 	mlx_string_put(game->mlx.mlx, game->mlx.mlx_win, (game->map_width / 2) - 32,
 		18, create_trgb(0, 255, 255, 255), "score: ");
@@ -26,7 +26,7 @@ void	print_score(t_game *game, char *score)
 	free(score);
 }
 
-void	draw_sprite(t_game *game, char *path, int x, int y)
+static void	draw_sprite(t_game *game, char *path, int x, int y)
 {
 	void	*img;
 	int		width;
@@ -38,7 +38,7 @@ void	draw_sprite(t_game *game, char *path, int x, int y)
 	mlx_destroy_image(game->mlx.mlx, img);
 }
 
-void	filter_sprite(t_game *game, int x, int y, int i)
+static void	filter_sprite(t_game *game, int x, int y, int i)
 {
 	char	*path_exit;
 
