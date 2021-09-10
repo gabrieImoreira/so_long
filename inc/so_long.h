@@ -30,17 +30,15 @@ typedef struct s_game
 {
 	t_mlx	mlx;
 	char	*path[2];
+	char	*map;
 	int		map_width;
 	int		map_height;
 	int		numb_move;
-	char	*map;
-	int		total_line_char;
-	int		line_number;
-	char	*player_position;
-	int		nb_exit;
-	int		side;
-	int		numb;
-	int		endline;
+	int		total_line;
+	int		total_column;
+	int		exit_is_free;
+	int		player_side;
+	int		aux_num;
 	int		fd;
 	int		x;
 	int		y;
@@ -52,8 +50,8 @@ void	check_walls(char *line);
 void	errors(char *nature, char *whole_chars);
 void	initializing_texture(t_game *game);
 void	set_image(t_game *game, t_img **img, char *path);
-void	draw_map(t_game *game);
 int		create_trgb(int t, int r, int g, int b);
+int		draw_map(t_game *game);
 int		end_game(t_game *game);
 int		key_hook(int keycode, t_game *game);
 

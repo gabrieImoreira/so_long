@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 20:19:14 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 21:35:19 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,33 @@ void	call_sprite(t_game *game, int x, int y, int i)
 	char	*path_exit;
 
 	game->path[PLAYER_RIGHT];
-	if (game->nb_exit == 1)
+	if (game->exit_is_free == 1)
 		path_exit = "./img/exit_open.xpm";
 	else
 		path_exit = "./img/exit_closed.xpm";
 	draw_sprite(game, "./img/floor.xpm", game->x, game->y);
-	if (game->map[i + game->numb] == 'P')
-		draw_sprite(game, game->path[game->side], game->x, game->y);
-	else if (game->map[i + game->numb] == 'C')
+	if (game->map[i + game->aux_num] == 'P')
+		draw_sprite(game, game->path[game->player_side], game->x, game->y);
+	else if (game->map[i + game->aux_num] == 'C')
 		draw_sprite(game, "./img/key.xpm", game->x, game->y);
-	else if (game->map[i + game->numb] == 'E')
+	else if (game->map[i + game->aux_num] == 'E')
 		draw_sprite(game, path_exit, game->x, game->y);
 }
 
-void	draw_map(t_game *game)
+int	draw_map(t_game *game)
 {
 	int		i;
 	char	*score;
 
-	game->numb = 0;
+	game->aux_num = 0;
 	game->y = 0;
 	game->x = 0;
-	while (game->y < (game->line_number))
+	while (game->y < (game->total_column))
 	{
 		i = 0;
-		while (i < game->total_line_char)
+		while (i < game->total_line)
 		{
-			if (game->map[i + game->numb] == '1')
+			if (game->map[i + game->aux_num] == '1')
 				draw_sprite(game, "./img/wall.xpm", game->x, game->y);
 			else
 				call_sprite(game, game->x, game->y, i);
@@ -70,8 +70,9 @@ void	draw_map(t_game *game)
 		free(score);
 		game->x = 0;
 		game->y++;
-		game->numb = game->total_line_char * game->y;
+		game->aux_num = game->total_line * game->y;
 	}
+	return (0);
 }
 
 int	create_trgb(int t, int r, int g, int b)
