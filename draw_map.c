@@ -6,11 +6,25 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 21:35:19 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:52:19 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./inc/so_long.h"
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void	print_score(t_game *game, char *score)
+{
+	mlx_string_put(game->mlx.mlx, game->mlx.mlx_win, (game->map_width / 2) - 32,
+		18, create_trgb(0, 255, 255, 255), "score: ");
+	mlx_string_put(game->mlx.mlx, game->mlx.mlx_win, (game->map_width / 2) + 8,
+		18, create_trgb(0, 255, 255, 255), score);
+	free(score);
+}
 
 void	draw_sprite(t_game *game, char *path, int x, int y)
 {
@@ -24,7 +38,7 @@ void	draw_sprite(t_game *game, char *path, int x, int y)
 	mlx_destroy_image(game->mlx.mlx, img);
 }
 
-void	call_sprite(t_game *game, int x, int y, int i)
+void	filter_sprite(t_game *game, int x, int y, int i)
 {
 	char	*path_exit;
 
@@ -58,24 +72,15 @@ int	draw_map(t_game *game)
 			if (game->map[i + game->aux_num] == '1')
 				draw_sprite(game, "./img/wall.xpm", game->x, game->y);
 			else
-				call_sprite(game, game->x, game->y, i);
+				filter_sprite(game, game->x, game->y, i);
 			game->x++;
 			i++;
 		}
 		score = ft_itoa(game->numb_move);
-		mlx_string_put(game->mlx.mlx, game->mlx.mlx_win, (game->map_width / 2) - 32,
-				18, create_trgb(0, 255, 255, 255), "score: ");
-		mlx_string_put(game->mlx.mlx, game->mlx.mlx_win, (game->map_width / 2) + 8,
-				18, create_trgb(0, 255, 255, 255), score);
-		free(score);
+		print_score(game, score);
 		game->x = 0;
 		game->y++;
 		game->aux_num = game->total_line * game->y;
 	}
 	return (0);
-}
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
 }

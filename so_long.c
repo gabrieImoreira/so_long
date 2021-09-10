@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 21:42:12 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:52:51 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 		game->total_column++;
 		size_line = ft_strlen(line) - 1;
 		if (line[0] != '1' || line[size_line] != '1')
-			errors("Error\nWall missing in the border", map_read);
+			errors("Error\nMap is not surrounded by walls", map_read);
 		ft_strcat(map_read, line);
 		free(line);
 		line = 0;
 		ret = get_next_line(game->fd, &line);
-		if ((ret != 0) && (ft_strlen(line)
+		if ((ft_strlen(line)
 				!= (long unsigned int)game->total_line))
-			errors("Error\nmap has a problem", map_read);
+			errors("Error\nInvalid parameters", map_read);
 		if (ret == 0)
 		{
 			game->total_column++;
@@ -67,13 +67,15 @@ int	initializing_map(t_game *game, char *map_name)
 	int		ret;
 	char	*map_read;
 
-	map_read = malloc(sizeof(char) * 10000);
+	map_read = malloc(sizeof(char) * 1000000);
+	if (!map_read)
+		exit (0);
 	*map_read = 0;
 	line = 0;
 	game->total_column = 0;
 	game->fd = open(map_name, O_RDONLY);
 	if (game->fd == -1)
-		errors("Error\nfile cannot be read", map_read);
+		errors("Error\nFile cannot be read", map_read);
 	ret = get_next_line(game->fd, &line);
 	check_walls(line);
 	game->total_line = ft_strlen(line);

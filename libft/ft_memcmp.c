@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 17:52:27 by gantonio          #+#    #+#             */
-/*   Updated: 2021/05/31 19:28:42 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:55:02 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_memcmp(const void *str1, const void *str2, size_t len)
 {
-	size_t			i;
+	size_t	i;
 
 	i = 0;
 	while (i < len)
