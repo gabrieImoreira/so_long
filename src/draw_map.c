@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 22:37:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/10 17:51:33 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/10 19:25:14 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,17 @@ static void	filter_sprite(t_game *game, int x, int y, int i)
 {
 	char	*path_exit;
 
-	game->path[PLAYER_RIGHT];
 	if (game->exit_is_free == 1)
 		path_exit = "./img/exit_open.xpm";
 	else
 		path_exit = "./img/exit_closed.xpm";
-	draw_sprite(game, "./img/floor.xpm", game->x, game->y);
+	draw_sprite(game, "./img/floor.xpm", x, y);
 	if (game->map[i + game->aux_num] == 'P')
-		draw_sprite(game, game->path[game->player_side], game->x, game->y);
+		draw_sprite(game, game->path[game->player_side], x, y);
 	else if (game->map[i + game->aux_num] == 'C')
-		draw_sprite(game, "./img/key.xpm", game->x, game->y);
+		draw_sprite(game, "./img/key.xpm", x, y);
 	else if (game->map[i + game->aux_num] == 'E')
-		draw_sprite(game, path_exit, game->x, game->y);
+		draw_sprite(game, path_exit, x, y);
 }
 
 int	draw_map(t_game *game)
