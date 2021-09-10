@@ -6,11 +6,11 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 14:24:45 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 23:52:42 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:51:54 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./inc/so_long.h"
+#include "../inc/so_long.h"
 
 void	move_left(t_game *game)
 {

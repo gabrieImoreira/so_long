@@ -6,13 +6,13 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 23:52:51 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:52:04 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./inc/so_long.h"
+#include "../inc/so_long.h"
 
-void	check_update_map(t_game *game, char *map_read)
+static void	check_update_map(t_game *game, char *map_read)
 {
 	if ((ft_strchr(map_read, 'P') == NULL)
 		|| (ft_strchr(map_read, 'E') == NULL)
@@ -32,7 +32,7 @@ void	check_update_map(t_game *game, char *map_read)
 	free(map_read);
 }
 
-void	treat_ret(int ret, t_game *game, char *line, char *map_read)
+static void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 {
 	int	size_line;
 
@@ -61,7 +61,7 @@ void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 	}
 }
 
-int	initializing_map(t_game *game, char *map_name)
+static int	initializing_map(t_game *game, char *map_name)
 {
 	char	*line;
 	int		ret;
@@ -84,7 +84,7 @@ int	initializing_map(t_game *game, char *map_name)
 	return (1);
 }
 
-int	initializing_struct(t_game *game)
+static int	initializing_struct(t_game *game)
 {
 	game->exit_is_free = 0;
 	game->numb_move = 0;

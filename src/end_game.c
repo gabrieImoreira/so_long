@@ -6,11 +6,11 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 20:43:13 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/09 20:06:46 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:51:42 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./inc/so_long.h"
+#include "../inc/so_long.h"
 
 int	end_game(t_game *game)
 {
