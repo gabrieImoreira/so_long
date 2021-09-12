@@ -37,11 +37,11 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 clean:
-	@rm -f $(OBJS) $(BONUS_OBJS)
+	@rm -f $(OBJS)
 	@echo "OBJECTS deleted"
 
 fclean: clean
-	make -C $(LIBFT_DIR) fclean
+	@make -C $(LIBFT_DIR) fclean
 	@rm -f $(NAME)
 	@echo "$(NAME) deleted"
 

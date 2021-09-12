@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/10 17:52:04 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/11 23:14:17 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static void	check_update_map(t_game *game, char *map_read)
 		|| (ft_strchr(map_read, 'C') == NULL))
 		errors("Error\nMissing one player, one collectible or one exit",
 			map_read);
-	if (game->total_column - 1 == game->total_line)
-		errors("Error\nMap is square!", map_read);
 	check_map_elements(map_read);
 	game->map_height = (game->total_column) * 32;
 	game->map_width = game->total_line * 32;
@@ -34,26 +32,22 @@ static void	check_update_map(t_game *game, char *map_read)
 
 static void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 {
-	int	size_line;
-
-	size_line = 0;
 	while (ret > 0)
 	{
 		game->total_column++;
-		size_line = ft_strlen(line) - 1;
-		if (line[0] != '1' || line[size_line] != '1')
-			errors("Error\nMap is not surrounded by walls", map_read);
+		game->size_line = ft_strlen(line) - 1;
+		if (line[0] != '1' || line[game->size_line] != '1')
+			free_chrs("Error\nMap is not surrounded by walls", map_read, line);
 		ft_strcat(map_read, line);
 		free(line);
 		line = 0;
 		ret = get_next_line(game->fd, &line);
-		if ((ft_strlen(line)
-				!= (long unsigned int)game->total_line))
-			errors("Error\nInvalid parameters", map_read);
+		if (((int)ft_strlen(line) != game->total_line))
+			free_chrs("Error\nInvalid parameters", map_read, line);
 		if (ret == 0)
 		{
 			game->total_column++;
-			check_walls(line);
+			check_walls(line, map_read);
 			ft_strcat(map_read, line);
 			free(line);
 			line = 0;
@@ -67,7 +61,8 @@ static int	initializing_map(t_game *game, char *map_name)
 	int		ret;
 	char	*map_read;
 
-	map_read = malloc(sizeof(char) * 1000000);
+	game->size_line = 0;
+	map_read = malloc(sizeof(char) * 100000);
 	if (!map_read)
 		exit (0);
 	*map_read = 0;
@@ -77,7 +72,7 @@ static int	initializing_map(t_game *game, char *map_name)
 	if (game->fd == -1)
 		errors("Error\nFile cannot be read", map_read);
 	ret = get_next_line(game->fd, &line);
-	check_walls(line);
+	check_walls(line, map_read);
 	game->total_line = ft_strlen(line);
 	treat_ret(ret, game, line, map_read);
 	check_update_map(game, map_read);

@@ -44,8 +44,9 @@ typedef struct s_game
 
 void	check_args(int argc, char **argv);
 void	check_map_elements(char *map_read);
-void	check_walls(char *line);
+void	check_walls(char *line, char *map_read);
 void	errors(char *nature, char *whole_chars);
+void	free_chrs(char *nature, char *map_read, char *line);
 void	initializing_texture(t_game *game);
 void	set_image(t_game *game, t_img **img, char *path);
 int		create_trgb(int t, int r, int g, int b);
