@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:38:33 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/11 23:14:17 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/12 14:10:28 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	check_update_map(t_game *game, char *map_read)
 	if ((ft_strchr(map_read, 'P') == NULL)
 		|| (ft_strchr(map_read, 'E') == NULL)
 		|| (ft_strchr(map_read, 'C') == NULL))
-		errors("Error\nMissing one player, one collectible or one exit",
-			map_read);
+		game->error = 3;
+	check_errors(game, map_read);
 	check_map_elements(map_read);
 	game->map_height = (game->total_column) * 32;
 	game->map_width = game->total_line * 32;
@@ -37,17 +37,17 @@ static void	treat_ret(int ret, t_game *game, char *line, char *map_read)
 		game->total_column++;
 		game->size_line = ft_strlen(line) - 1;
 		if (line[0] != '1' || line[game->size_line] != '1')
-			free_chrs("Error\nMap is not surrounded by walls", map_read, line);
+			game->error = 1;
 		ft_strcat(map_read, line);
 		free(line);
 		line = 0;
 		ret = get_next_line(game->fd, &line);
 		if (((int)ft_strlen(line) != game->total_line))
-			free_chrs("Error\nInvalid parameters", map_read, line);
+			game->error = 2;
 		if (ret == 0)
 		{
 			game->total_column++;
-			check_walls(line, map_read);
+			check_walls(game, line);
 			ft_strcat(map_read, line);
 			free(line);
 			line = 0;
@@ -61,6 +61,7 @@ static int	initializing_map(t_game *game, char *map_name)
 	int		ret;
 	char	*map_read;
 
+	game->error = 0;
 	game->size_line = 0;
 	map_read = malloc(sizeof(char) * 100000);
 	if (!map_read)
@@ -72,7 +73,7 @@ static int	initializing_map(t_game *game, char *map_name)
 	if (game->fd == -1)
 		errors("Error\nFile cannot be read", map_read);
 	ret = get_next_line(game->fd, &line);
-	check_walls(line, map_read);
+	check_walls(game, line);
 	game->total_line = ft_strlen(line);
 	treat_ret(ret, game, line, map_read);
 	check_update_map(game, map_read);

@@ -6,24 +6,16 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 19:22:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/11 23:17:02 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/12 14:10:45 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	errors(char *nature, char *map_read)
+void	errors(char *message, char *map_read)
 {
-	ft_putendl_fd(nature, 2);
+	ft_putendl_fd(message, 2);
 	free(map_read);
-	exit (1);
-}
-
-void	free_chrs(char *nature, char *map_read, char *line)
-{
-	ft_putendl_fd(nature, 2);
-	free(map_read);
-	free(line);
 	exit (1);
 }
 
@@ -46,7 +38,7 @@ void	check_args(int argc, char **argv)
 	}
 }
 
-void	check_walls(char *line, char *map_read)
+void	check_walls(t_game *game, char *line)
 {
 	int	i;
 
@@ -54,12 +46,7 @@ void	check_walls(char *line, char *map_read)
 	while (line[i] != '\0')
 	{
 		if (line[i] != '1')
-		{
-			ft_putendl_fd("Error\nMap is not surrounded by walls", 2);
-			free(map_read);
-			free(line);
-			exit (1);
-		}
+			game->error = 1;
 		i++;
 	}
 }
@@ -85,4 +72,15 @@ void	check_map_elements(char *map_read)
 	}
 	if (counter > 1)
 		errors("Error\nOnly one player should be on the map", map_read);
+}
+
+void check_errors(t_game *game, char *map_read)
+{
+	if (game->error == 1)
+		errors("Error\nMap is not surrounded by walls", map_read);
+	if (game->error == 2)
+		errors("Error\nInvalid parameters", map_read);
+	if (game->error == 3)	
+		errors("Error\nMissing one player, one collectible or one exit",
+			map_read);
 }
