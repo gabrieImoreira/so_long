@@ -45,7 +45,7 @@ typedef struct s_game
 
 void	check_args(int argc, char **argv);
 void	check_map_elements(char *map_read);
-void 	check_errors(t_game *game, char *map_read);
+void	check_errors(t_game *game, char *map_read);
 void	check_walls(t_game *game, char *line);
 void	errors(char *nature, char *whole_chars);
 void	initializing_texture(t_game *game);
