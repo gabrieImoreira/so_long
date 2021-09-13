@@ -6,7 +6,7 @@
 /*   By: gantonio <gantonio@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 19:22:10 by gantonio          #+#    #+#             */
-/*   Updated: 2021/09/12 14:25:44 by gantonio         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:07:23 by gantonio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	check_errors(t_game *game, char *map_read)
 {
 	if (game->error == 1)
 		errors("Error\nMap is not surrounded by walls", map_read);
-	if (game->error == 2)
+	else if (game->error == 2)
 		errors("Error\nInvalid parameters", map_read);
-	if (game->error == 3)
+	else if (game->error == 3)
 		errors("Error\nMissing one player, one collectible or one exit",
 			map_read);
 }
